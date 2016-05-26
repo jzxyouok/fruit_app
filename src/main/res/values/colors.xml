@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="red">#ffff0000</color>
+    <color name="LightGray">#ffeeeeee</color>
+    <color name="tab_background_color">#fff7f7f7</color>
+    <color name="tab_color">#FF45C01A</color>
+    <!-- 灰色 -->
+    <color name="bg_Gray">#CCCCCC</color>
+    <!-- 浅灰色 -->
+    <color name="bg_Gray_light">#EEEEEE</color>
+
+    <color name="divider_color">#fff3f3f3</color>
+
+</resources>
