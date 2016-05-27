@@ -70,6 +70,7 @@ public class HomeFragment extends Fragment {
         for(SellerBean sellerBean: sellers)
         {
             sellerBean.setImage(String.valueOf(i%2==0?R.drawable.menu_guide_1:R.mipmap.menu_guide_2));
+            i++;
         }
 
     }

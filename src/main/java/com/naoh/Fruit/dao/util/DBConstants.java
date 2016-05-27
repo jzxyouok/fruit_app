@@ -36,6 +36,7 @@ public class DBConstants {
             "name varchar(64)," +
             "place varchar(128)," +
             "price REAL," +
+            "marketPrice REAL," +
             "avail integer," +
             "desc text," +
             "publishDate long" +
@@ -79,7 +80,8 @@ public class DBConstants {
     // 8.
     public static final String CREATE_TABLE_CATEGORY = "create table category ("+
             "id integer primary key autoincrement,"+
-            "name varchar(64)"+
+            "name varchar(64),"+
+            "image integer"+
             ")";
 
 

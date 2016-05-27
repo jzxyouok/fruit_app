@@ -22,6 +22,9 @@ public class ProductBean {
     //价格
     double price;
 
+    //市场价
+    double marketPrice;
+
     // 剩余数量
     int avail;
 
@@ -33,6 +36,14 @@ public class ProductBean {
 
     //发布时间
     Date publishDate;
+
+    public double getMarketPrice() {
+        return marketPrice;
+    }
+
+    public void setMarketPrice(double marketPrice) {
+        this.marketPrice = marketPrice;
+    }
 
     public Date getPublishDate() {
         return publishDate;
