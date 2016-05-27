@@ -8,19 +8,31 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.example.administrator.myapplication.R;
+import com.naoh.Fruit.Data.SellerBean;
+
+import java.util.List;
+import java.util.Map;
 
 public class Adapter_GridView extends BaseAdapter {
 private Context context;
 private int[] data;
-	
+	List<SellerBean> sellers = null;
 	public Adapter_GridView(Context context, int[] data){
-		
 		this.context=context;
 		this.data=data;
+	}
+
+	public Adapter_GridView(Context context, List<SellerBean> sellers){
+		int [] datas = {R.drawable.menu_guide_1,R.mipmap.menu_guide_2};
+		this.data = datas;
+		this.context=context;
+		this.sellers = sellers;
 	}
 	
 	@Override
 	public int getCount() {
+		if(null!=sellers&& sellers.size()>0)
+			return sellers.size();
 		return data.length;
 	}
 
@@ -45,9 +57,11 @@ private int[] data;
 		}else {
 			holderView=(HolderView) currentView.getTag();
 		}
-		
-		
-		holderView.iv_pic.setImageResource(data[position]);
+
+		if(null!=sellers&&sellers.size()>position)
+			holderView.iv_pic.setImageResource(Integer.parseInt(sellers.get(position).getImage()));
+		else
+			holderView.iv_pic.setImageResource(data[position]);
 		
 		
 		return currentView;

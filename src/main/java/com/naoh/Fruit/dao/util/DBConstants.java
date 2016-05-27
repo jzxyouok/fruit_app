@@ -116,6 +116,13 @@ public class DBConstants {
         insertSqls.add("insert into category(name) values('樱桃')");
         insertSqls.add("insert into category(name) values('其他')");
 
+        insertSqls.add("insert into seller(name, telephone, address, password, image) values('admin', '18808884762', '大连', 'admin', '')");
+        insertSqls.add("insert into seller(name, telephone, address, password, image) values('seller1', '18808884761', '北京', 'seller1', '')");
+        insertSqls.add("insert into seller(name, telephone, address, password, image) values('admin1', '18808884762', '大连', 'admin', '')");
+        insertSqls.add("insert into seller(name, telephone, address, password, image) values('seller2', '18808884761', '北京', 'seller1', '')");
+        insertSqls.add("insert into seller(name, telephone, address, password, image) values('admin2', '18808884762', '大连', 'admin', '')");
+        insertSqls.add("insert into seller(name, telephone, address, password, image) values('seller3', '18808884761', '北京', 'seller1', '')");
+
     }
 
 

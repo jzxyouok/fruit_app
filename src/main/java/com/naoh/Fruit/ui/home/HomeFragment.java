@@ -14,10 +14,17 @@ import android.widget.ImageView;
 
 import com.naoh.Fruit.Adapter.Adapter_GridView;
 import com.example.administrator.myapplication.R;
+import com.naoh.Fruit.Data.ProductImage;
+import com.naoh.Fruit.Data.SellerBean;
 import com.naoh.Fruit.ab.view.AbOnItemClickListener;
 import com.naoh.Fruit.ab.view.AbSlidingPlayView;
+import com.naoh.Fruit.dao.SellerService;
+import com.naoh.Fruit.dao.util.TestService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by NaOH on 2016/4/15.
@@ -32,6 +39,8 @@ public class HomeFragment extends Fragment {
     // 分类九宫格的资源文件
 //    private int[] pic_path_classify = {R.mipmap.menu_guide_1, R., R.mipmap.menu_guide_3, R.mipmap.menu_guide_4, R.mipmap.menu_guide_5, R.mipmap.menu_guide_6, R.mipmap.menu_guide_7, R.mipmap.menu_guide_8};
     private int[] pic_path_classify = {R.drawable.menu_guide_1,R.mipmap.menu_guide_2};
+
+    private List<SellerBean> sellers = new ArrayList<SellerBean>();
 
     /**
      * 存储首页轮播的界面
@@ -51,11 +60,27 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 获取所有卖家信息
+     */
+    private void initSellers()
+    {
+        sellers = new SellerService(getActivity()).findAll();
+        int i=0;
+        for(SellerBean sellerBean: sellers)
+        {
+            sellerBean.setImage(String.valueOf(i%2==0?R.drawable.menu_guide_1:R.mipmap.menu_guide_2));
+        }
+
+    }
+
     private void initView(View view) {
+        initSellers();
 
         gridView_classify = (GridView) view.findViewById(R.id.my_gridview);
         gridView_classify.setSelector(new ColorDrawable(Color.TRANSPARENT));
-        adapter_GridView_classify = new Adapter_GridView(getActivity(), pic_path_classify);
+        //adapter_GridView_classify = new Adapter_GridView(getActivity(), pic_path_classify);
+        adapter_GridView_classify = new Adapter_GridView(getActivity(), sellers);
         gridView_classify.setAdapter(adapter_GridView_classify);
 
         viewPager = (AbSlidingPlayView) view.findViewById(R.id.viewPager_menu);
