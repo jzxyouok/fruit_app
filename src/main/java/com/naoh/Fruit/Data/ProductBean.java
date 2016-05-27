@@ -37,6 +37,17 @@ public class ProductBean {
     //发布时间
     Date publishDate;
 
+    //默认图片
+    String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public double getMarketPrice() {
         return marketPrice;
     }
@@ -123,5 +134,23 @@ public class ProductBean {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductBean{" +
+                "id=" + id +
+                ", categoryId=" + categoryId +
+                ", sellerId=" + sellerId +
+                ", name='" + name + '\'' +
+                ", place='" + place + '\'' +
+                ", price=" + price +
+                ", marketPrice=" + marketPrice +
+                ", avail=" + avail +
+                ", images=" + images +
+                ", desc='" + desc + '\'' +
+                ", publishDate=" + publishDate +
+                ", image='" + image + '\'' +
+                '}';
     }
 }

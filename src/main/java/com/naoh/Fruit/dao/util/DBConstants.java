@@ -39,7 +39,8 @@ public class DBConstants {
             "marketPrice REAL," +
             "avail integer," +
             "desc text," +
-            "publishDate long" +
+            "publishDate long," +
+            "image varchar(128)"+
             ")";
 
     // 4.
