@@ -48,7 +48,7 @@ public class CategoryService extends AbstractService {
                 record.setId(id);
                 record.setName(name);
                 record.setImage(imageId);
-                System.out.println( "get category :" + id +"," + name +"," + imageId );
+                System.out.println( record);
 
                 list.add(record);
             }
