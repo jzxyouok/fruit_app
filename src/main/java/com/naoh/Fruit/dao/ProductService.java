@@ -29,45 +29,79 @@ public class ProductService extends  AbstractService {
         else
             sql = SQL +"  order by publishDate desc limit ?";
 
-        List<ProductBean> list = null;
-        SQLiteDatabase db = null;
-        Cursor cursor = null;
-        try
-        {
-            db = dbHelper.getReadableDatabase();
-            String[] values = { String.valueOf(n)};
-            cursor = db.rawQuery(sql, values);
-            list = getProductListByCursor(cursor);
-
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        } finally
-        {
-            if (null != db)
-            {
-                db.close();
-            }
-
-            if (null != cursor)
-            {
-                cursor.close();
-            }
-        }
-
-        return list;
+        String[] values = { String.valueOf(n)};
+        return  findLimitProducts(sql,values );
     }
 
-    public List<ProductBean> findLimitProducts(int start, int size)
+
+    /**
+     *
+     * @param sellerId:卖家ID，如果小于1,获取所有卖家的
+     * @param categoryId：目录ID，如果小于1，获取所有目录下的商品
+     * @param start：起始位置
+     * @param size：获取多少个
+     * @return
+     */
+    public List<ProductBean> findProductsWithSellerAndCategoryId(int sellerId, int categoryId, int start, int size)
     {
-        String sql = SQL + "limit ?, ?";
+        StringBuffer sb = new StringBuffer(SQL);
+        boolean sellerPara = false;
+        boolean categoryPara = false;
+        if(sellerId>0||categoryId>0)
+        {
+            sb.append("Where ");
+        }
+
+        if(sellerId>0)
+        {
+            sb.append(" sellerId = ?");
+            sellerPara = true;
+        }
+
+        if(categoryId > 0)
+        {
+            sb.append(" categoryId = ? " + categoryId);
+            categoryPara = true;
+        }
+
+        sb.append(" limit ?, ?");
+
+        if(sellerPara&&categoryPara)
+        {
+            String[] values = {String.valueOf(sellerId), String.valueOf(categoryId),
+                    String.valueOf(start),String.valueOf(size)
+            };
+            return findLimitProducts(sb.toString(), values);
+        }
+
+        if(sellerPara)
+        {
+            String[] values = {String.valueOf(sellerId), String.valueOf(start),String.valueOf(size)
+            };
+            return findLimitProducts(sb.toString(), values);
+        }
+
+        if(categoryPara)
+        {
+            String[] values = {String.valueOf(categoryId), String.valueOf(start),String.valueOf(size)
+            };
+            return findLimitProducts(sb.toString(), values);
+        }
+
+        return  null;
+
+    }
+
+    public List<ProductBean> findLimitProducts(String sql, String[] values)
+    {
+
         List<ProductBean> list = null;
         SQLiteDatabase db = null;
         Cursor cursor = null;
         try
         {
             db = dbHelper.getReadableDatabase();
-            cursor = db.rawQuery(sql, null);
+            cursor = db.rawQuery(sql, values);
 
             list = getProductListByCursor(cursor);
 
