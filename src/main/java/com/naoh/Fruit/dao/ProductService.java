@@ -21,6 +21,42 @@ public class ProductService extends  AbstractService {
         this.dbHelper = new DBHelper(context);
     }
 
+    public List<ProductBean> findLastNProducts(int categoryId, int n)
+    {
+        String sql = "";
+        if(categoryId!=0)
+            sql = SQL + " where categoryId=" + categoryId+" order by publishDate desc limit ?";
+        else
+            sql = SQL +"  order by publishDate desc limit ?";
+
+        List<ProductBean> list = null;
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        try
+        {
+            db = dbHelper.getReadableDatabase();
+            String[] values = { String.valueOf(n)};
+            cursor = db.rawQuery(sql, values);
+            list = getProductListByCursor(cursor);
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        } finally
+        {
+            if (null != db)
+            {
+                db.close();
+            }
+
+            if (null != cursor)
+            {
+                cursor.close();
+            }
+        }
+
+        return list;
+    }
 
     public List<ProductBean> findLimitProducts(int start, int size)
     {

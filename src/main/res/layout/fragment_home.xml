@@ -5,9 +5,86 @@
     android:background="#FFFFFF"
     android:orientation="vertical">
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/layout_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <FrameLayout android:layout_width="fill_parent"
+            android:layout_height="48dp" >
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="20dp"
+                android:background="#000000" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/nav_bg" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/searcher_new_search_box"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageButton
+                    android:id="@+id/back_button"
+                    android:layout_width="32dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#00000000"
+                    android:src="@drawable/item_grid_header_arrow_icon"
+                    android:visibility="gone" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp" >
+
+                    <EditText
+                        android:id="@+id/search_input"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="70dp"
+                        android:background="@drawable/searcher_new_search_box"
+                        android:gravity="center_vertical"
+                        android:hint="@string/search_input"
+                        android:paddingLeft="35dp"
+                        android:paddingRight="10dp"
+                        android:singleLine="true"
+                        android:textSize="16dp"
+                        android:imeActionId="@+id/search_input_actionid"
+                        android:inputType="text"
+                        android:imeOptions="actionSearch"/>
+
+                    <ImageView
+                        android:id="@+id/search_search"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:padding="10dp"
+                        android:src="@drawable/searcher_new_search_icon" />
+                </FrameLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+<!--    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent">-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,22 +98,29 @@
                 android:layout_marginBottom="10dp"
                 android:background="#00000000" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/bg_Gray" />
+
+            <GridView
+                android:id="@+id/categoryGird"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:horizontalSpacing="10dp"
+                android:listSelector="#000000"
+                android:numColumns="3"
+                android:verticalSpacing="10dp"></GridView>
 
             <com.naoh.Fruit.view.MyGridView
                 android:id="@+id/my_gridview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:horizontalSpacing="10dp"
-                android:numColumns="4"
+                android:numColumns="3"
                 android:verticalSpacing="10dp">
-
             </com.naoh.Fruit.view.MyGridView>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/bg_Gray" />
 
            <!-- <LinearLayout
                 android:layout_width="match_parent"
@@ -102,5 +186,5 @@
             </LinearLayout>-->
 
         </LinearLayout>
-    </ScrollView>
+    <!--</ScrollView>-->
 </LinearLayout>

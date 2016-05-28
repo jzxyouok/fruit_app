@@ -13,4 +13,7 @@
 
     <color name="divider_color">#fff3f3f3</color>
 
+    <!-- 沙褐色 -->
+    <color name="azure">#f0ffff</color>
+
 </resources>

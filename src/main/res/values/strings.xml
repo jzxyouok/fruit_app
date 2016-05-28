@@ -28,4 +28,5 @@
     <string name="sure">确认</string>
     <string name="drop">取消</string>
     <string name="reg">注册</string>>
+    <string name="search_input">请输入商品名称或店铺名</string>
 </resources>

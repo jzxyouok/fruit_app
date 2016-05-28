@@ -1,6 +1,8 @@
 package com.naoh.Fruit.ui.home;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,24 +14,30 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.naoh.Fruit.Adapter.Adapter_GridView;
 import com.example.administrator.myapplication.R;
-import com.naoh.Fruit.Data.ProductImage;
+import com.naoh.Fruit.Adapter.Adapter_GridView;
+import com.naoh.Fruit.Adapter.CategoryGridAdapter;
+import com.naoh.Fruit.Data.ProductBean;
 import com.naoh.Fruit.Data.SellerBean;
 import com.naoh.Fruit.ab.view.AbOnItemClickListener;
 import com.naoh.Fruit.ab.view.AbSlidingPlayView;
+import com.naoh.Fruit.dao.CategoryService;
+import com.naoh.Fruit.dao.ProductService;
 import com.naoh.Fruit.dao.SellerService;
-import com.naoh.Fruit.dao.util.TestService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by NaOH on 2016/4/15.
  */
 public class HomeFragment extends Fragment {
+
+    /**
+     * category网格
+     */
+    private GridView categoryGrid;
+    private CategoryGridAdapter categoryGridAdapter;
 
     //分类的九宫格
     private GridView gridView_classify;
@@ -50,7 +58,7 @@ public class HomeFragment extends Fragment {
      * 首页轮播的界面的资源
      */
 //    private int[] resId = {R.mipmap.menu_viewpager_1, R.mipmap.menu_viewpager_2, R.mipmap.menu_viewpager_3, R.mipmap.menu_viewpager_4, R.mipmap.menu_viewpager_5, R.mipmap.menu_viewpager_6};
-    private int[] resId = {};
+    private List<ProductBean> last5Product;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,14 +83,35 @@ public class HomeFragment extends Fragment {
 
     }
 
+    /**
+     * 获取所有分类
+     */
+
+    /**
+     * 获取最新的5个产品
+     */
+    private void initLast5Product()
+    {
+        last5Product = new ProductService(getActivity()).findLastNProducts(0, 5);
+    }
+
+
     private void initView(View view) {
         initSellers();
+        initLast5Product();
 
-        gridView_classify = (GridView) view.findViewById(R.id.my_gridview);
-        gridView_classify.setSelector(new ColorDrawable(Color.TRANSPARENT));
-        //adapter_GridView_classify = new Adapter_GridView(getActivity(), pic_path_classify);
-        adapter_GridView_classify = new Adapter_GridView(getActivity(), sellers);
-        gridView_classify.setAdapter(adapter_GridView_classify);
+
+//        gridView_classify = (GridView) view.findViewById(R.id.my_gridview);
+//        gridView_classify.setSelector(new ColorDrawable(Color.TRANSPARENT));
+//        //adapter_GridView_classify = new Adapter_GridView(getActivity(), pic_path_classify);
+//        adapter_GridView_classify = new Adapter_GridView(getActivity(), sellers);
+//        gridView_classify.setAdapter(adapter_GridView_classify);
+
+
+        categoryGrid = (GridView)view.findViewById(R.id.categoryGird);
+        categoryGrid.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        categoryGridAdapter = new CategoryGridAdapter(getActivity(), new CategoryService(getActivity()).findAll());
+        categoryGrid.setAdapter(categoryGridAdapter);
 
         viewPager = (AbSlidingPlayView) view.findViewById(R.id.viewPager_menu);
         //设置播放方式为顺序播放
@@ -90,7 +119,16 @@ public class HomeFragment extends Fragment {
         //设置播放间隔时间
         viewPager.setSleepTime(3000);
 
-        gridView_classify.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//        gridView_classify.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+//                //跳转到宝贝搜索界面
+//                Intent intent = new Intent(getActivity(), WareActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+
+        categoryGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 //跳转到宝贝搜索界面
@@ -110,13 +148,32 @@ public class HomeFragment extends Fragment {
         }
         allListView = new ArrayList<View>();
 
-        for (int i = 0; i < resId.length; i++) {
-            //导入ViewPager的布局
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.pic_item, null);
-            ImageView imageView = (ImageView) view.findViewById(R.id.pic_item);
-            imageView.setImageResource(resId[i]);
-            allListView.add(view);
+
+        if(last5Product!=null)
+        {
+            for(ProductBean productBean: last5Product)
+            {
+                View view = LayoutInflater.from(getActivity()).inflate(R.layout.pic_item, null);
+                ImageView imageView = (ImageView) view.findViewById(R.id.pic_item);
+                try{
+                    imageView.setImageResource(Integer.parseInt(productBean.getImage()));
+                }catch (Exception ex)
+                {
+                    Bitmap bit = BitmapFactory.decodeFile(productBean.getImage());
+                    imageView.setImageBitmap(bit);
+                }
+                allListView.add(view);
+
+            }
         }
+
+//        for (int i = 0; i < resId.length; i++) {
+//            //导入ViewPager的布局
+//            View view = LayoutInflater.from(getActivity()).inflate(R.layout.pic_item, null);
+//            ImageView imageView = (ImageView) view.findViewById(R.id.pic_item);
+//            imageView.setImageResource(resId[i]);
+//            allListView.add(view);
+//        }
 
 
         viewPager.addViews(allListView);
