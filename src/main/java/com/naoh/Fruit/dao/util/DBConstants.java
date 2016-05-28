@@ -77,7 +77,8 @@ public class DBConstants {
             "tradeCount integer," +
             "tradeDate long," +
             "money real," +
-            "orderId varchar(128)" +
+            "orderId varchar(128)," + //订单ID，生成一个guid
+            "payed integer"+ //是否已经支付
             ")";
 
     // 8.
@@ -99,6 +100,16 @@ public class DBConstants {
             ")";
 
 
+    public static final String CREATE_TABLE_ORDERS = "create table orders (" +
+            "orderId varchar(128) primary key," + //订单号
+            "userId integer," + //买家
+            "sellerId integer," + //卖家
+            "payed integer," + // 是否已经付账
+            "hasSended integer," + //是否已经发货
+            "address varchar(128)" + //收货地址
+            ")";
+
+
     public static final Map<String, String> sqlCreateMap = new HashMap<String, String>();
     public static final List<String> insertSqls = new LinkedList<String>();
 
@@ -112,6 +123,7 @@ public class DBConstants {
         sqlCreateMap.put("CREATE_TABLE_TRADING_RECORD", CREATE_TABLE_TRADING_RECORD);
         sqlCreateMap.put("CREATE_TABLE_CATEGORY", CREATE_TABLE_CATEGORY);
         sqlCreateMap.put("CREATE_TABLE_COMMENT", CREATE_TABLE_COMMENT);
+        sqlCreateMap.put("CREATE_TABLE_ORDERS", CREATE_TABLE_ORDERS);
 
         insertSqls.add("insert into category(name, image) values('苹果',"+R.mipmap.pingguo+")");
         insertSqls.add("insert into category(name, image) values('香蕉',"+R.mipmap.xiangjiao+")");
@@ -147,8 +159,6 @@ public class DBConstants {
 
         insertSqls.add("insert into product (categoryId, sellerId, name, place, price, marketPrice, avail, desc, publishDate, image) values(1, 1, '山东红富士', '山东烟台', 8.0, 13.0, 50, '正宗山东烟台红富士', "+System.currentTimeMillis()+", '"+ R.mipmap.yantaiapple+"')");
         insertSqls.add("insert into product (categoryId, sellerId, name, place, price, marketPrice, avail, desc, publishDate, image) values(2, 2, '海南香蕉', '海南', 5.0, 7.0, 30, '正宗海南香蕉', "+System.currentTimeMillis()+", '"+ R.mipmap.hainan_banana+"')");
-
-
 
     }
 

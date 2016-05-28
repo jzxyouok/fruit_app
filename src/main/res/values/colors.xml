@@ -16,4 +16,9 @@
     <!-- 沙褐色 -->
     <color name="azure">#f0ffff</color>
 
+    <color name="bluejeff">#0861B1</color>
+
+    <color name="green">#008000</color> <!-- 绿色 -->
+    <color name="gray">#808080</color> <!-- 灰色 -->
+
 </resources>
