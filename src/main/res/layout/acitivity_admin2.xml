@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/admin_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/admin_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/tab_bg"
+        android:orientation="horizontal">
+
+        <com.naoh.Fruit.view.ChangeColorIconWithText
+            android:id="@+id/admin_indicator_one"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:color="#ff45c01a"
+            app:icon="@mipmap/guide_cart_nm"
+            app:text="所有订单"
+            app:text_size="@dimen/tab_text_size" />
+
+        <com.naoh.Fruit.view.ChangeColorIconWithText
+            android:id="@+id/admin_indicator_two"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:color="@color/tab_color"
+            app:icon="@mipmap/guide_tfaccount_nm"
+            app:text="已发布的商品"
+            app:text_size="@dimen/tab_text_size" />
+
+        <com.naoh.Fruit.view.ChangeColorIconWithText
+            android:id="@+id/admin_indicator_three"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:color="@color/tab_color"
+            app:icon="@mipmap/guide_cart_nm"
+            app:text="发布新商品"
+            app:text_size="@dimen/tab_text_size" />
+    </LinearLayout>
+
+</LinearLayout>

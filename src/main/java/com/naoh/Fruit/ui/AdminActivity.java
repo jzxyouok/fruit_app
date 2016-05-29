@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.example.administrator.myapplication.R;
 import com.naoh.Fruit.Config;
+import com.naoh.Fruit.ui.admin.AllOrdersFragment;
 import com.naoh.Fruit.ui.cart.CartFragment;
 import com.naoh.Fruit.ui.home.HomeFragment;
 import com.naoh.Fruit.view.ChangeColorIconWithText;
@@ -41,7 +42,7 @@ public class AdminActivity extends FragmentActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.acitivity_admin2);
 
         //初始化所有的界面
         initView();
@@ -88,51 +89,40 @@ public class AdminActivity extends FragmentActivity implements View.OnClickListe
      */
     private void initFragments() {
         //用于展示首页的Fragment
-        HomeFragment homeFragment = new HomeFragment();
-        mTabs.add(homeFragment);
+        AllOrdersFragment ordersFragment = new AllOrdersFragment();
+        mTabs.add(ordersFragment);
 
         TabFragment tabFragment = new TabFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(TabFragment.TITLE, mTitles[0]);
+        bundle.putString(TabFragment.TITLE, mTitles[1]);
         tabFragment.setArguments(bundle);
         mTabs.add(tabFragment);
 
-//        TabFragment tabFragment1 = new TabFragment();
-//        Bundle bundle1 = new Bundle();
-//        bundle1.putString(TabFragment.TITLE, mTitles[1]);
-//        tabFragment1.setArguments(bundle1);
-//        mTabs.add(tabFragment1);
 
+        /**
+         * TODO:修改成管理员的查看个人信息，历史订单信息的
+         */
         CartFragment cartFragment = new CartFragment();
         mTabs.add(cartFragment);
-
-        TabFragment tabFragment2 = new TabFragment();
-        Bundle bundle2 = new Bundle();
-        bundle2.putString(TabFragment.TITLE, mTitles[2]);
-        tabFragment2.setArguments(bundle2);
-        mTabs.add(tabFragment2);
     }
 
     /**
      * 初始化所有的界面
      */
     private void initView() {
-        mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
-        mTabChat = (LinearLayout) findViewById(R.id.id_indicator);
-        ChangeColorIconWithText one = (ChangeColorIconWithText) findViewById(R.id.id_indicator_one);
-        ChangeColorIconWithText two = (ChangeColorIconWithText) findViewById(R.id.id_indicator_two);
-        ChangeColorIconWithText three = (ChangeColorIconWithText) findViewById(R.id.id_indicator_three);
-        ChangeColorIconWithText four = (ChangeColorIconWithText) findViewById(R.id.id_indicator_four);
+        mViewPager = (ViewPager) findViewById(R.id.admin_viewpager);
+        mTabChat = (LinearLayout) findViewById(R.id.admin_indicator);
+        ChangeColorIconWithText one = (ChangeColorIconWithText) findViewById(R.id.admin_indicator_one);
+        ChangeColorIconWithText two = (ChangeColorIconWithText) findViewById(R.id.admin_indicator_two);
+        ChangeColorIconWithText three = (ChangeColorIconWithText) findViewById(R.id.admin_indicator_three);
 
         mTabIndicators.add(one);
         mTabIndicators.add(two);
         mTabIndicators.add(three);
-        mTabIndicators.add(four);
 
         one.setOnClickListener(this);
         two.setOnClickListener(this);
         three.setOnClickListener(this);
-        four.setOnClickListener(this);
 
         one.setIconAlpha(Config.PURE_COLOR);
     }
@@ -162,21 +152,17 @@ public class AdminActivity extends FragmentActivity implements View.OnClickListe
         resetOtherTabs();
 
         switch (v.getId()) {
-            case R.id.id_indicator_one:
+            case R.id.admin_indicator_one:
                 mTabIndicators.get(Config.DEVICE_INDEX).setIconAlpha(Config.PURE_COLOR);
                 mViewPager.setCurrentItem(Config.DEVICE_INDEX, false);
                 break;
-            case R.id.id_indicator_two:
+            case R.id.admin_indicator_two:
                 mTabIndicators.get(Config.ORDER_INDEX).setIconAlpha(Config.PURE_COLOR);
                 mViewPager.setCurrentItem(Config.ORDER_INDEX, false);
                 break;
-            case R.id.id_indicator_three:
+            case R.id.admin_indicator_three:
                 mTabIndicators.get(Config.INFO_INDEX).setIconAlpha(Config.PURE_COLOR);
                 mViewPager.setCurrentItem(Config.INFO_INDEX, false);
-                break;
-            case R.id.id_indicator_four:
-                mTabIndicators.get(Config.SETTINGS_INDEX).setIconAlpha(Config.PURE_COLOR);
-                mViewPager.setCurrentItem(Config.SETTINGS_INDEX, false);
                 break;
         }
     }

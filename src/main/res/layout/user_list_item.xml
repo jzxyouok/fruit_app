@@ -54,7 +54,7 @@
 	             android:layout_height="30dp"
 	             android:textSize="12sp"
 	             android:layout_marginLeft="10dp"
-	             android:text="IT部门    信息科"
+	             android:text="IT部门 信息科"
 	             android:textColor="@color/gray" />
 
 	     </LinearLayout>
