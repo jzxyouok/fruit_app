@@ -24,24 +24,33 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.administrator.myapplication.R;
+import com.naoh.Fruit.Data.ProductBean;
+import com.naoh.Fruit.dao.ProductService;
 import com.naoh.Fruit.util.photo.Bimp;
 import com.naoh.Fruit.util.photo.FileUtils;
 import com.naoh.Fruit.util.photo.ImageItem;
 import com.naoh.Fruit.util.photo.PublicWay;
 import com.naoh.Fruit.util.photo.Res;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
- * 首页面activity
+ * 发布商品activity
  */
 public class PublishActivity extends Activity {
 
@@ -51,7 +60,26 @@ public class PublishActivity extends Activity {
 	private PopupWindow pop = null;
 	private LinearLayout ll_popup;
 	public static Bitmap bimap ;
-	
+	private Spinner categorySpinner;
+	private TextView publish;
+	private EditText productname;
+	private EditText productDesc;
+	private EditText vailNum;
+	private EditText price;
+
+
+	Map<String, Integer> categoryMap = new HashMap<String, Integer>();
+	final String arr[]=new String[]{
+			"苹果",
+			"香蕉",
+			"梨",
+			"橙子",
+			"火龙果",
+			"菠萝",
+			"其他"
+	};
+
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Res.init(this);
@@ -61,11 +89,75 @@ public class PublishActivity extends Activity {
 		PublicWay.activityList.add(this);
 		parentView = getLayoutInflater().inflate(R.layout.activity_selectimg, null);
 		setContentView(parentView);
+
+		initCategoryMap();
+
+		/**
+		 * 商品的种类
+		 */
+		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryMap.keySet().toArray(new String[categoryMap.size()]));
+		categorySpinner = (Spinner) findViewById(R.id.spinner_pruduct_category);
+		categorySpinner.setAdapter(arrayAdapter);
+
+
+		productDesc = (EditText)findViewById(R.id.pruduct_desc);
+		vailNum = (EditText)findViewById(R.id.pruduct_avail);
+		price = (EditText)findViewById(R.id.pruduct_price);
+		productname = (EditText)findViewById(R.id.pruduct_name);
+
 		Init();
 	}
 
+	private void initCategoryMap() {
+		categoryMap.put("苹果", 1);
+		categoryMap.put("香蕉", 2);
+		categoryMap.put("梨", 3);
+		categoryMap.put("橙子", 4);
+		categoryMap.put("火龙果", 5);
+		categoryMap.put("菠萝", 6);
+		categoryMap.put("桃子", 7);
+		categoryMap.put("西瓜", 8);
+		categoryMap.put("柠檬", 9);
+		categoryMap.put("葡萄", 10);
+		categoryMap.put("草莓", 11);
+		categoryMap.put("荔枝", 12);
+		categoryMap.put("猕猴桃", 13);
+		categoryMap.put("木瓜", 14);
+		categoryMap.put("芒果", 15);
+		categoryMap.put("哈密瓜", 16);
+		categoryMap.put("柚子", 17);
+		categoryMap.put("樱桃", 18);
+		categoryMap.put("柑橘", 19);
+		categoryMap.put("甜瓜", 20);
+		categoryMap.put("其他", 21);
+	}
+
 	public void Init() {
-		
+		/**
+		 * 点击发布执行插入数据库
+		 */
+		publish = (TextView) findViewById(R.id.activity_selectimg_send);
+		publish.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ProductBean productBean = new ProductBean();
+				productBean.setCategoryId(categoryMap.get(categorySpinner.getSelectedItem()));
+				productBean.setSellerId(1);
+				productBean.setDesc(productDesc.getText().toString());
+				productBean.setAvail(Integer.parseInt(vailNum.getText().toString()));
+				productBean.setName(productname.getText().toString());
+				productBean.setPrice(Float.parseFloat(price.getText().toString()));
+				productBean.setMarketPrice(productBean.getPrice()+3.5);
+				productBean.setImage(Bimp.tempSelectBitmap.get(0).getImagePath());
+				int result = new ProductService(PublishActivity.this).publishProduct(productBean);
+				Log.i("ProductBean", productBean.toString());
+				if(result==1)
+				{
+					Log.i("ProductBean", "Publish Successfully");
+				}
+			}
+		});
+
 		pop = new PopupWindow(PublishActivity.this);
 		
 		View view = getLayoutInflater().inflate(R.layout.item_popupwindows, null);
@@ -209,6 +301,7 @@ public class PublishActivity extends Activity {
 					holder.image.setVisibility(View.GONE);
 				}
 			} else {
+				Log.i("ImageItem", Bimp.tempSelectBitmap.get(position).toString());
 				holder.image.setImageBitmap(Bimp.tempSelectBitmap.get(position).getBitmap());
 			}
 

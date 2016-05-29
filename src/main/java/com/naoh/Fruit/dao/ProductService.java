@@ -21,6 +21,40 @@ public class ProductService extends  AbstractService {
         this.dbHelper = new DBHelper(context);
     }
 
+    public int publishProduct(ProductBean productBean)
+    {
+        SQLiteDatabase db = null;
+        try
+        {
+            db = dbHelper.getWritableDatabase();
+            String sql = "insert into product(categoryId, sellerId, name, price, marketPrice, avail, desc, publishDate, image)"+
+                    "values(?,?,?,?,?,?,?,?,?)";
+
+            Object[] values = { productBean.getCategoryId(),
+                    productBean.getSellerId(),
+                    productBean.getName(),  productBean.getPrice(),
+                    productBean.getMarketPrice(),
+                    productBean.getAvail(),
+                    productBean.getDesc(),
+                    System.currentTimeMillis(),
+                    productBean.getImage()
+            };
+            db.execSQL(sql, values);
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return 0;
+        } finally
+        {
+            if (db != null)
+                db.close();
+        }
+
+        return  1;
+    }
+
+
     public List<ProductBean> findLastNProducts(int categoryId, int n)
     {
         String sql = "";

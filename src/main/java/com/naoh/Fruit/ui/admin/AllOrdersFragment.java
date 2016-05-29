@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -80,6 +82,23 @@ public class AllOrdersFragment extends Fragment implements View.OnTouchListener,
 
         ll_search = (LinearLayout)  view.findViewById(R.id.order_choice);
         ed_search = (EditText) view.findViewById(R.id.order_SearchOrder);
+
+        ed_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         listView = (XListView) view.findViewById(R.id.listOrderView);
         listView.setOnTouchListener(this);

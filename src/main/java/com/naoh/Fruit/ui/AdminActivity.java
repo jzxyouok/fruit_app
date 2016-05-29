@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import com.example.administrator.myapplication.R;
 import com.naoh.Fruit.Config;
 import com.naoh.Fruit.ui.admin.AllOrdersFragment;
+import com.naoh.Fruit.ui.admin.MyProductsFragment;
 import com.naoh.Fruit.ui.cart.CartFragment;
 import com.naoh.Fruit.ui.home.HomeFragment;
 import com.naoh.Fruit.view.ChangeColorIconWithText;
@@ -92,11 +93,13 @@ public class AdminActivity extends FragmentActivity implements View.OnClickListe
         AllOrdersFragment ordersFragment = new AllOrdersFragment();
         mTabs.add(ordersFragment);
 
-        TabFragment tabFragment = new TabFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(TabFragment.TITLE, mTitles[1]);
-        tabFragment.setArguments(bundle);
-        mTabs.add(tabFragment);
+        MyProductsFragment productsFragment = new MyProductsFragment();
+
+//        TabFragment tabFragment = new TabFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putString(TabFragment.TITLE, mTitles[1]);
+//        tabFragment.setArguments(bundle);
+        mTabs.add(productsFragment);
 
 
         /**

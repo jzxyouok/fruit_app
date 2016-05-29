@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="写动态"
+            android:text="发布商品"
             android:textColor="#ffffff"
             android:textSize="20sp" />
 
@@ -26,17 +26,98 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
             android:gravity="center"
-            android:text="发送"
+            android:text="发布"
             android:textColor="@drawable/text_while"
             android:textSize="20sp" />
     </RelativeLayout>
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
 
-    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商品名称："
+            />
+        <EditText
+            android:id="@+id/pruduct_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="商品名称"
+            android:background="@null" >
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商品种类："
+            />
+        <Spinner
+            android:id="@+id/spinner_pruduct_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ></Spinner>
+        </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="单价："
+            />
+        <EditText
+            android:id="@+id/pruduct_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="0.0"
+            android:background="@null" >
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="数量：" />
+        <EditText
+            android:id="@+id/pruduct_avail"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_alignParentRight="true"
+            android:gravity="left|top"
+            android:hint="0"
+            android:background="@null" >
+        </EditText>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="商品描述："
+        />
+   <EditText
+        android:id="@+id/pruduct_desc"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:layout_margin="8dp"
         android:gravity="left|top"
-        android:hint="说点什么吧..."       
+        android:hint="商品描述..."
         android:background="@null" >
     </EditText>
 
