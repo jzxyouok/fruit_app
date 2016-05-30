@@ -4,31 +4,48 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.administrator.myapplication.R;
+import com.naoh.Fruit.Adapter.Adapter_Comment_detail;
+import com.naoh.Fruit.Data.Comment;
+import com.naoh.Fruit.Data.ProductBean;
+import com.naoh.Fruit.dao.CommentService;
+import com.naoh.Fruit.dao.ProductService;
 import com.naoh.Fruit.view.DetailPopWindow;
 import com.naoh.Fruit.view.ScaleView.HackyViewPager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by NaOH on 2016/4/15.
  */
 public class DetailActivity extends FragmentActivity implements View.OnClickListener, DetailPopWindow.OnPopWindowClickListener {
+
+    /**
+     * 要显示的商品对象
+     */
+    ProductBean productBean;
+
     private HackyViewPager viewPager;
     private ArrayList<View> allListView;
     private int[] resId = {R.mipmap.detail_show_1, R.mipmap.detail_show_2, R.mipmap.detail_show_3, R.mipmap.detail_show_4, R.mipmap.detail_show_5, R.mipmap.detail_show_6};
-    //    private ListView listView;
+     private ListView listView;
     private ImageView iv_baby_collection;
     /**
      * 弹出商品订单信息详情
@@ -54,6 +71,17 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /**
+         * 从Bundle中获取商品的ID
+         */
+        Bundle bundle = getIntent().getExtras();
+        Long productId = bundle.getLong("productId");
+        /**
+         * 根据商品ID获取商品内容
+         */
+        ProductBean productBean = new ProductService(DetailActivity.this).getProductByProductId(productId);
+        Log.i("ProductBean", productBean.toString());
         setContentView(R.layout.activity_detail);
         //得到保存的收藏信息
         getSaveCollection();
@@ -70,21 +98,22 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
         iv_baby_collection = (ImageView) findViewById(R.id.iv_baby_collection);
         iv_baby_collection.setOnClickListener(this);
         all_choice_layout = (LinearLayout) findViewById(R.id.all_choice_layout);
-/*这是评价
+        /*这是评价*/
         listView = (ListView) findViewById(R.id.listView_Detail);
         listView.setFocusable(false);
         listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
-        listView.setAdapter(new Adapter_ListView_detail(this));
+        //List<Comment> commentList = new CommentService(DetailActivity.this).findAllCommentByPid(productBean.getId());
+        List<Comment> commentList = new ArrayList<Comment>();
+        commentList.add(new Comment(1, 5, "味道不错，下次还买"));
+        commentList.add(new Comment(2, 5, "很好吃，下次还买"));
+        commentList.add(new Comment(3, 4, "味道一般，服务一般"));
+        listView.setAdapter(new Adapter_Comment_detail(DetailActivity.this, commentList));
         listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                //进入恋上猫女衣坊的网店
-                Uri uri = Uri.parse("http://yecaoly.taobao.com");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+
             }
-        });*/
+        });
         initViewPager();
 
         if (isCollection) {

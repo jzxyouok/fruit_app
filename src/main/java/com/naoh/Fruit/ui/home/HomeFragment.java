@@ -184,6 +184,8 @@ public class HomeFragment extends Fragment {
             public void onClick(int position) {
                 //跳转到详情界面
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putLong("productId", last5Product.get(position).getId());
                 startActivity(intent);
             }
         });

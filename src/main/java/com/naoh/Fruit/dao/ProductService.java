@@ -203,4 +203,35 @@ public class ProductService extends  AbstractService {
 
         return list;
     }
+
+    public ProductBean getProductByProductId(Long productId) {
+        String sql = SQL + " where id = ?";
+        String[] values = {String.valueOf(productId)
+        };
+        List<ProductBean> list = null;
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        try
+        {
+            db = dbHelper.getReadableDatabase();
+            cursor = db.rawQuery(sql, values);
+            list = getProductListByCursor(cursor);
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        } finally
+        {
+            if (null != db)
+            {
+                db.close();
+            }
+
+            if (null != cursor)
+            {
+                cursor.close();
+            }
+        }
+        return list.get(0);
+    }
 }

@@ -151,10 +151,7 @@ public class PublishActivity extends Activity {
 				productBean.setImage(Bimp.tempSelectBitmap.get(0).getImagePath());
 				int result = new ProductService(PublishActivity.this).publishProduct(productBean);
 				Log.i("ProductBean", productBean.toString());
-				if(result==1)
-				{
-					Log.i("ProductBean", "Publish Successfully");
-				}
+				PublishActivity.this.finish();
 			}
 		});
 

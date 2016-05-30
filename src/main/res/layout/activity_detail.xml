@@ -97,7 +97,7 @@
                 android:layout_margin="10dp"
                 android:background="#CCCCCC" />
 
-            <!--            <TextView
+                       <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
@@ -105,12 +105,12 @@
                             android:textColor="#000000"
                             android:textSize="18sp" />
 
-                        <com.jarvis.MyView.MyListView
+                        <ListView
                             android:id="@+id/listView_Detail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:cacheColorHint="#00000000" >
-                        </com.jarvis.MyView.MyListView>-->
+                        </ListView>
         </LinearLayout>
     </ScrollView>
 
