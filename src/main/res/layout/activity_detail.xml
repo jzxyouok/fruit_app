@@ -97,20 +97,44 @@
                 android:layout_margin="10dp"
                 android:background="#CCCCCC" />
 
-                       <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:text="宝贝评价"
-                            android:textColor="#000000"
-                            android:textSize="18sp" />
+               <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="评价"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
 
-                        <ListView
-                            android:id="@+id/listView_Detail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:cacheColorHint="#00000000" >
-                        </ListView>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/comment_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_weight="4"
+                        android:layout_margin="8dp"
+                        android:gravity="left|top"
+                        android:hint="评价..."
+                        android:background="@null" >
+                    </EditText>
+                    <Button
+                        android:text="提交"
+                        android:id="@+id/publish_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+
+                </LinearLayout>
+
+                <ListView
+                    android:id="@+id/listView_Detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cacheColorHint="#00000000" >
+                </ListView>
         </LinearLayout>
     </ScrollView>
 

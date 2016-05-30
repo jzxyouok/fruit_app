@@ -15,11 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.administrator.myapplication.R;
@@ -70,6 +71,13 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
      */
     private int position = 0;
 
+    //android:id="@+id/comment_content"
+    Button publishComment;
+    EditText comment_content;
+    List<Comment> commentList;
+
+    Adapter_Comment_detail commentAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +102,19 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
 
     private void initView() {
 
+        publishComment = (Button)findViewById(R.id.publish_comment);
+        comment_content = (EditText)findViewById(R.id.comment_content);
+        publishComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new CommentService(DetailActivity.this).addComment(productBean, comment_content.getText().toString());
+                commentList.add(0, new Comment(1, 5, comment_content.getText().toString()));
+                comment_content.setText(comment_content.getHint());
+                commentAdapter.notifyDataSetChanged();
+                setListViewHeightBasedOnChildren(listView);
+            }
+        });
+
         ((ImageView) findViewById(R.id.iv_back)).setOnClickListener(this);
         ((ImageView) findViewById(R.id.put_in)).setOnClickListener(this);
         ((ImageView) findViewById(R.id.buy_now)).setOnClickListener(this);
@@ -105,12 +126,12 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
         listView.setFocusable(false);
         listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
         //List<Comment> commentList = new CommentService(DetailActivity.this).findAllCommentByPid(productBean.getId());
-        List<Comment> commentList = new ArrayList<Comment>();
+        commentList = new ArrayList<Comment>();
         commentList.add(new Comment(1, 5, "味道不错，下次还买"));
         commentList.add(new Comment(2, 5, "很好吃，下次还买"));
         commentList.add(new Comment(3, 4, "味道一般，服务一般"));
-
-        listView.setAdapter(new Adapter_Comment_detail(DetailActivity.this, commentList));
+        commentAdapter = new Adapter_Comment_detail(DetailActivity.this, commentList);
+        listView.setAdapter(commentAdapter);
         setListViewHeightBasedOnChildren(listView);
         listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
