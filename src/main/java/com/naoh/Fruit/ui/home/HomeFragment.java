@@ -186,6 +186,7 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putLong("productId", last5Product.get(position).getId());
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

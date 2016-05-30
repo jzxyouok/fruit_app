@@ -15,6 +15,7 @@ import com.naoh.Fruit.Config;
 import com.example.administrator.myapplication.R;
 import com.naoh.Fruit.ui.cart.CartFragment;
 import com.naoh.Fruit.ui.home.HomeFragment;
+import com.naoh.Fruit.ui.home.MyOrdersFragment;
 import com.naoh.Fruit.ui.phone.SellerFragment;
 import com.naoh.Fruit.view.ChangeColorIconWithText;
 
@@ -104,11 +105,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         CartFragment cartFragment = new CartFragment();
         mTabs.add(cartFragment);
 
-        TabFragment tabFragment2 = new TabFragment();
-        Bundle bundle2 = new Bundle();
-        bundle2.putString(TabFragment.TITLE, mTitles[2]);
-        tabFragment2.setArguments(bundle2);
-        mTabs.add(tabFragment2);
+//        TabFragment tabFragment2 = new TabFragment();
+//        Bundle bundle2 = new Bundle();
+//        bundle2.putString(TabFragment.TITLE, mTitles[2]);
+//        tabFragment2.setArguments(bundle2);
+
+        MyOrdersFragment ordersFragment = new MyOrdersFragment();
+        mTabs.add(ordersFragment);
     }
 
     /**
