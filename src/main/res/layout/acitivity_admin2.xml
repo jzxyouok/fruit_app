@@ -45,7 +45,7 @@
             android:layout_weight="1"
             android:padding="5dp"
             app:color="@color/tab_color"
-            app:icon="@mipmap/guide_cart_nm"
+            app:icon="@mipmap/guide_account_nm"
             app:text="发布新商品"
             app:text_size="@dimen/tab_text_size" />
     </LinearLayout>

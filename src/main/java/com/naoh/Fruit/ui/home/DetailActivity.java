@@ -47,7 +47,7 @@ public class DetailActivity extends FragmentActivity implements View.OnClickList
 
     private HackyViewPager viewPager;
     private ArrayList<View> allListView;
-    private int[] resId = {R.mipmap.detail_show_1, R.mipmap.detail_show_2, R.mipmap.detail_show_3, R.mipmap.detail_show_4, R.mipmap.detail_show_5, R.mipmap.detail_show_6};
+    private int[] resId = {R.mipmap.boluo_default, R.mipmap.boluo_image_1, R.mipmap.boluo_image_2, R.mipmap.boluo_image_3, R.mipmap.boluo_image_4, R.mipmap.boluo};
      private ListView listView;
     private ImageView iv_baby_collection;
     /**
