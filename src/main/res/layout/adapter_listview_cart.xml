@@ -23,7 +23,7 @@
             android:layout_height="80dp"
             android:layout_margin="5dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/detail_show_1" />
+            android:src="@mipmap/boluo_default" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="时尚女衣  尽在恋上猫女衣坊 http//yecaoly.taobao.com"
+                android:text="精品菠萝 http//yecaoly.fruit.com"
                 android:textColor="@color/black" />
 
             <TextView

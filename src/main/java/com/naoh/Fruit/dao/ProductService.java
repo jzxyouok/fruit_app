@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.naoh.Fruit.Data.ProductBean;
+import com.naoh.Fruit.Data.ProductPriceReductionRecord;
 import com.naoh.Fruit.dao.util.DBHelper;
 
 import java.util.LinkedList;
@@ -233,5 +234,48 @@ public class ProductService extends  AbstractService {
             }
         }
         return list.get(0);
+    }
+
+    public List<ProductPriceReductionRecord> findReductionProduction() {
+        String sql = " select ppr.id, ppr.productId, p.image,p.name, ppr.originPrice, ppr.currentPrice from productpricereductionrecord ppr, product p\n" +
+                " where ppr.productId=p.id";
+        List<ProductPriceReductionRecord> list = new LinkedList<ProductPriceReductionRecord>();
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        try
+        {
+            db = dbHelper.getReadableDatabase();
+            cursor = db.rawQuery(sql, null);
+            while (cursor.moveToNext())
+            {
+                ProductPriceReductionRecord ppr = new ProductPriceReductionRecord();
+                ppr.setReductionRecordId(cursor.getInt(0));
+                ppr.setProductId(cursor.getInt(1));
+                ProductBean product = new ProductBean();
+                product.setImage(cursor.getString(2));
+                product.setName(cursor.getString(3));
+                ppr.setProductBean(product);
+                ppr.setOriginPrice(cursor.getDouble(4));
+                ppr.setCurrentPrice(cursor.getDouble(5));
+                list.add(ppr);
+            }
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        } finally
+        {
+            if (null != db)
+            {
+                db.close();
+            }
+
+            if (null != cursor)
+            {
+                cursor.close();
+            }
+        }
+        return list;
+
     }
 }

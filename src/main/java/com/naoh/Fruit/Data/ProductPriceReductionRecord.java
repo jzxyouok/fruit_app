@@ -19,6 +19,16 @@ public class ProductPriceReductionRecord {
     // 降价时间
     Date date;
 
+    ProductBean productBean;
+
+    public ProductBean getProductBean() {
+        return productBean;
+    }
+
+    public void setProductBean(ProductBean productBean) {
+        this.productBean = productBean;
+    }
+
     public int getReductionRecordId() {
         return reductionRecordId;
     }
@@ -57,5 +67,17 @@ public class ProductPriceReductionRecord {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductPriceReductionRecord{" +
+                "reductionRecordId=" + reductionRecordId +
+                ", productId=" + productId +
+                ", originPrice=" + originPrice +
+                ", currentPrice=" + currentPrice +
+                ", date=" + date +
+                ", productBean=" + productBean +
+                '}';
     }
 }
