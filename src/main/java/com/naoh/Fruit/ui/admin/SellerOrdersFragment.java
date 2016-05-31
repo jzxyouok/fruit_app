@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.myapplication.R;
+import com.naoh.Fruit.Data.Data;
 
 /**
  * Created by Administrator on 2016/5/31.
  */
 public class SellerOrdersFragment extends Fragment implements View.OnClickListener {
-    private View show_all_orders;
 
     private TextView bt_orders_all, bt_handled_orders, bt_unhandled_orders, bt_order_edit;
 
@@ -36,7 +36,6 @@ public class SellerOrdersFragment extends Fragment implements View.OnClickListen
 
     private void initView(View view) {
         ((TextView) view.findViewById(R.id.tv_top_txtTitle)).setText("商家中心");
-
         bt_orders_all = (TextView) view.findViewById(R.id.bt_all_orders);
         bt_handled_orders = (TextView) view.findViewById(R.id.bt_handled_order);
         bt_unhandled_orders = (TextView) view.findViewById(R.id.bt_unhandled_order);
@@ -62,6 +61,26 @@ public class SellerOrdersFragment extends Fragment implements View.OnClickListen
         Log.i("SellersOrder", String.valueOf(v.getId()));
         switch (v.getId()) {
             case R.id.tv_top_edit:
+                if (allUserOrderFragment !=null&&isDel) {
+                    removeFragment(allUserOrderFragment);
+                    allUserOrderFragment =null;
+                    allUserOrderFragment =new AllUserOrdersFragment("处理");
+                    addFragment(allUserOrderFragment);
+                    showFragment(allUserOrderFragment);
+                    isDel=false;
+                    bt_order_edit.setText("完成");
+                    Data.Allprice_cart=0;
+
+                }else if (!isDel&& allUserOrderFragment !=null) {
+                    removeFragment(allUserOrderFragment);
+                    allUserOrderFragment =null;
+                    allUserOrderFragment =new AllUserOrdersFragment();
+                    addFragment(allUserOrderFragment);
+                    showFragment(allUserOrderFragment);
+                    isDel=true;
+                    Data.Allprice_cart=0;
+                    bt_order_edit.setText("编辑");
+                }
                 break;
             case R.id.bt_all_orders:
                 if (allUserOrderFragment == null) {
@@ -72,21 +91,21 @@ public class SellerOrdersFragment extends Fragment implements View.OnClickListen
                     showFragment(allUserOrderFragment);
                 }
 
-                show_all_orders.setBackgroundColor(getResources().getColor(R.color.black));
-                show_all_orders.setBackgroundColor(getResources().getColor(R.color.bg_Gray));
-                show_all_orders.setBackgroundColor(getResources().getColor(R.color.bg_Gray));
+                show_orders_all.setBackgroundColor(getResources().getColor(R.color.black));
+                show_handled_orders.setBackgroundColor(getResources().getColor(R.color.bg_Gray));
+                show_unhandled_order.setBackgroundColor(getResources().getColor(R.color.bg_Gray));
                 break;
             case R.id.bt_handled_order:
                 if (handledOrderFragment == null) {
-                    handledOrderFragment = new HandledOrderFragment();
+                    handledOrderFragment = new HandledOrderFragment("处理");
                     addFragment(handledOrderFragment);
                     showFragment(handledOrderFragment);
                 } else {
                     showFragment(handledOrderFragment);
                 }
                 show_handled_orders.setBackgroundColor(getResources().getColor(R.color.black));
-                show_handled_orders.setBackgroundColor(getResources().getColor(R.color.bg_Gray));
-                show_handled_orders.setBackgroundColor(getResources().getColor(R.color.bg_Gray));
+                show_orders_all.setBackgroundColor(getResources().getColor(R.color.bg_Gray));
+                show_unhandled_order.setBackgroundColor(getResources().getColor(R.color.bg_Gray));
 
                 break;
             case R.id.bt_unhandled_order:
@@ -98,8 +117,8 @@ public class SellerOrdersFragment extends Fragment implements View.OnClickListen
                     showFragment(unHandledOrderFragment);
                 }
                 show_unhandled_order.setBackgroundColor(getResources().getColor(R.color.black));
-                show_unhandled_order.setBackgroundColor(getResources().getColor(R.color.bg_Gray));
-                show_unhandled_order.setBackgroundColor(getResources().getColor(R.color.bg_Gray));
+                show_orders_all.setBackgroundColor(getResources().getColor(R.color.bg_Gray));
+                show_handled_orders.setBackgroundColor(getResources().getColor(R.color.bg_Gray));
 
                 break;
 

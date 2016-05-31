@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="购物车快饿扁了T.T"
+                android:text="暂无订单"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -91,7 +91,9 @@
                     android:gravity="right"
                     android:paddingRight="10dp"
                     android:text="合计：￥0.0"
-                    android:textColor="@color/red" />
+                    android:textColor="@color/red"
+                    android:visibility="gone"
+                    />
 
                 <TextView
                     android:id="@+id/tv_cart_buy_or_del"
@@ -101,7 +103,7 @@
                     android:background="@color/red"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="结算(0)"
+                    android:text="处理"
                     android:textColor="@color/white" />
             </LinearLayout>
         </RelativeLayout>
