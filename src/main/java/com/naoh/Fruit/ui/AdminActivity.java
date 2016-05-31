@@ -15,6 +15,7 @@ import com.example.administrator.myapplication.R;
 import com.naoh.Fruit.Config;
 import com.naoh.Fruit.ui.admin.AllOrdersFragment;
 import com.naoh.Fruit.ui.admin.MyProductsFragment;
+import com.naoh.Fruit.ui.admin.SellerOrdersFragment;
 import com.naoh.Fruit.ui.cart.CartFragment;
 import com.naoh.Fruit.ui.home.HomeFragment;
 import com.naoh.Fruit.view.ChangeColorIconWithText;
@@ -95,18 +96,11 @@ public class AdminActivity extends FragmentActivity implements View.OnClickListe
 
         MyProductsFragment productsFragment = new MyProductsFragment();
 
-//        TabFragment tabFragment = new TabFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putString(TabFragment.TITLE, mTitles[1]);
-//        tabFragment.setArguments(bundle);
         mTabs.add(productsFragment);
 
 
-        /**
-         * TODO:修改成管理员的查看个人信息，历史订单信息的
-         */
-        CartFragment cartFragment = new CartFragment();
-        mTabs.add(cartFragment);
+        SellerOrdersFragment sellerOrdersFragment = new SellerOrdersFragment();
+        mTabs.add(sellerOrdersFragment);
     }
 
     /**

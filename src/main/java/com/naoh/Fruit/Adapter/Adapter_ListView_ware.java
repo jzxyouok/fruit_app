@@ -19,6 +19,10 @@ import java.util.HashMap;
  * Created by NaOH on 2016/4/18.
  */
 public class Adapter_ListView_ware extends BaseAdapter {
+    public static int[] imageIds = {R.mipmap.putao_image, R.mipmap.ningmeng_image, R.mipmap.caomei_image, R.mipmap.huolongguo_image,
+        R.mipmap.yingtao, R.mipmap.chengzi_image, R.mipmap.pingguo_image,
+            R.mipmap.qiyiguo_image, R.mipmap.taozi_image, R.mipmap.li_image
+    };
 
     private Context context;
     @SuppressWarnings("unused")
@@ -72,6 +76,10 @@ public class Adapter_ListView_ware extends BaseAdapter {
             holderView.tv_price.setText("￥" + arrayList.get(position).get("price").toString() + "元");
             holderView.tv_sale_num.setText("月销量:" + arrayList.get(position).get("sale_num").toString() + "件     " + arrayList.get(position).get("address").toString());
         }
+
+
+        holderView.iv_pic.setImageResource(imageIds[position%10]);
+
         return convertView;
     }
 
